@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { FlightsContext } from '../context/FlightsContext';
 
+
 const Filters = () => {
+    const { setFilters } = useContext(FlightsContext);  //setFilters state'ini ContextAPI'den aldık.
 
-    const { setFilters } = useContext(FlightsContext);  //Get the setFilters state from ContextApi
-
-    //Handle changes in arrival time filter
+    //Arrival time(varış zamanı) filtresindeki değişkenleri handle ettik.
     const handleArrivalTimeChange = (event) => {
         const selectedValue = event.target.value;
 
@@ -15,7 +15,7 @@ const Filters = () => {
         }));
     };
 
-    //Handle changes in stops filter
+    //'stops' filtresindeki değişkenleri handle ettik.
     const handleStopsChange = (event) => {
         setFilters(prevFilters => ({
             ...prevFilters,
@@ -24,11 +24,11 @@ const Filters = () => {
     };
     return (
         <div>
-            <div className='pl-5 py-4 flex flex-col gap-5 text-sm'>
-                <section >
+            <div className='pl-5 py-4 w-full justify-around flex md:flex-col gap-5 text-sm'>
+                <section className='hidden sm:block'>
                     <h1 className='font-semibold mb-2'>Sort by:</h1>
-                    <select className='outline-none rounded py-[5px] w-44 px-1'>
-                        <option value="" >Recommended</option>
+                    <select className='outline-none rounded py-[5px] xl:w-44 px-1'>
+                        <option value="">Recommended</option>
                         <option value="">Lowest Price</option>
                         <option value="">Highest Price</option>
                     </select>
@@ -111,7 +111,7 @@ const Filters = () => {
                     </div>
                 </section>
 
-                <section>
+                <section className='hidden sm:block'>
                     <h1 className='font-semibold mb-2'>Airlines Included</h1>
                     <div className='flex flex-col gap-1 text-[13px]'>
                         <div className='flex items-center justify-between'>

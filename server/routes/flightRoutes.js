@@ -3,7 +3,7 @@ import { getFlights } from '../controllers/flightControllers.js';
 
 const router = express.Router();
 
-router.get("/", getFlights);
+router.get("/", getFlights);   //Uçuş bilgilerini aldığımız rota.
 
 
 export default router

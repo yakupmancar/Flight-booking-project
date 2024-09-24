@@ -1,9 +1,10 @@
 import MyFlightModel from "../models/flightModel.js";
 
+// Kullanıcının uçuş rezervasyonu yapmasını sağlayan fonksiyon 
 export const createFlight = async (req, res) => {
-    const flight = req.body;
+    const flight = req.body;    //body'den gelen uçuş verisini alırız
 
-    const newFlight = new MyFlightModel(flight);
+    const newFlight = new MyFlightModel(flight);    //Yeni uçuş modeli oluşturduk (Schema'da)
 
     try {
         await newFlight.save();
@@ -15,12 +16,13 @@ export const createFlight = async (req, res) => {
 };
 
 
+// Kullanıcıya ait kayıtlı rezervasyonları getiren fonksiyon.
 export const getMyFlights = async (req, res) => {
 
     try {
-        const userId = req.params.userId
-        const myFlights = await MyFlightModel.find({userId: userId});
-        if(myFlights.length === 0) {
+        const userId = req.params.userId    //Kullanıcın id'sini alırız.
+        const myFlights = await MyFlightModel.find({ userId: userId });  // Aldığımız id'ye göre kullanıcının kayıtlı uçuşlarını getiririz.
+        if (myFlights.length === 0) {
             return res.status(404).send("No records found for the user");
         }
         res.status(200).json({ success: true, data: myFlights });

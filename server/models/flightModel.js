@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//Kullanıcı uçuşlarındaki değişkenleri tuttuğumuz şema.
 const myFlightSchema = new mongoose.Schema({
     userId: {type: String, required: true},
     departureTime: { type: Date, required: true },

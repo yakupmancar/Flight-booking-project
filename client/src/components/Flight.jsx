@@ -12,15 +12,16 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Flight = ({ flight }) => {
 
-  const { addFlight } = useContext(FlightsContext);   //Pull the addFlight function from FlightsContext.
+  const { addFlight } = useContext(FlightsContext);   // addFlight fonksiyonunu FlightsContext'ten çektik.
+
   const navigate = useNavigate();
 
-  const { user } = useUser();   //Clerk's useUser hook to get user information.
+  const { user } = useUser();   // Kullanıcı bilgilerini almak için Clerk'in useUser() hook'unu kullandık.
 
-  if (!flight) return null;   //If there is no flight information nothing is rendered.
+  if (!flight) return null;   // Uçuş bilgisi yoksa hiçbir şey render edilmez.
   console.log(flight)
 
-  //An object that holds the match between airport codes and city names. Because it came from the API as an airport code instead of a city name. :)) 
+  // Havaalanı kodları ile şehir adları arasındaki eşleşmeyi tutan bir nesne. Çünkü API'den şehir adı yerine havaalanı kodu olarak geldi :))
   const airportCodes = {
     "AMS": "Amsterdam",
     "NCE": "Nice",
@@ -51,29 +52,32 @@ const Flight = ({ flight }) => {
     "PFO": "Paphos",
     "ADB": "İzmir",
     "GRO": "Girona",
-    "TBS": "Tbilisi"
-
+    "TBS": "Tbilisi",
+    "LIS": "Lisbon",
+    "BRI": "Bari",
+    "MJT": "Mitilini",
+    "DLMBJV": "Milas",
   };
 
-  //Calculating flight departure and arrival time.
+  // Uçak kalkış ve varış saatlerini hesapladık.
   const departureTime = new Date(flight.scheduleDateTime);
   const arrivalTime = new Date(flight.expectedTimeOnBelt);
 
-  //Calculating the duration of the flight in minutes.
+  // Uçuş süresini dakika olarak hesaplıyoruz.
   const duration = Math.ceil((new Date(flight.expectedTimeOnBelt) - new Date(flight.scheduleDateTime)) / 60000);
   const destinations = flight.route.destinations;
   const arrivalCity = airportCodes[destinations] || destinations;
 
-  //Formatting departure and arrival times according to Türkiye time zone.
+  //Kalkış ve varış saatlerinin Türkiye saat dilimine çevirdik.
   const options = { timeZone: 'Europe/Istanbul', hour: '2-digit', minute: '2-digit', hour12: false };
   const departureTimeTR = departureTime.toLocaleString('tr-TR', options);
   const arrivalTimeTR = arrivalTime.toLocaleString('tr-TR', options);
 
 
-  //Flight booking function
+  //Uçuş rezervasyon fonksiyonu
   const handleBookFlight = async () => {
     try {
-      // Booking process
+      // Rezervasyon süreci
       const flightData = {
         userId: user?.id,
         departureTime: departureTime.toISOString(),
@@ -85,7 +89,7 @@ const Flight = ({ flight }) => {
 
       await addFlight(flightData);
 
-      // Successful transaction alert
+      // Başarılı işlem uyarısı
       toast.success("Rezervasyon başarıyla tamamlandı!", {
         position: "top-right",
         autoClose: 1500
@@ -97,7 +101,7 @@ const Flight = ({ flight }) => {
       }, 1500);
 
     } catch (error) {
-      // Warning in case of error
+      // Hata durumunda uyarı
       toast.error(error.message, {
         position: "top-right",
         autoClose: 1500
@@ -125,10 +129,10 @@ const Flight = ({ flight }) => {
 
           </section>
 
-          <div className='border-2 border-gray-400 px-10 rounded-2xl'></div>
+          <div className='border-2 border-gray-400 px-6 sm:px-10 rounded-2xl'></div>
 
           <section className='flex flex-col items-center'>
-            <span className='text-6xl'>
+            <span className='text-5xl sm:text-6xl'>
               <SiPegasusairlines />
             </span>
             <span className='mt-[-10px]'>
@@ -139,7 +143,7 @@ const Flight = ({ flight }) => {
             </small>
           </section>
 
-          <div className='border-2 border-gray-400 px-10 rounded-2xl'></div>
+          <div className='border-2 border-gray-400 px-6 sm:px-10 rounded-2xl'></div>
 
           <section className='flex flex-col'>
             <span className='flex items-center gap-x-2'>
@@ -152,19 +156,19 @@ const Flight = ({ flight }) => {
         </div>
 
         <div className='flex justify-between pt-4'>
-          <div className='flex flex-col pb-3 pl-5'>
+          <div className='flex flex-col pb-2 sm:pb-3 pl-5'>
             <h1 className='text-[#3d008d] font-bold'>Price: $200</h1>
             <h1 className='text-sm'>Round Trip</h1>
           </div>
-          <button className='bg-[#3d008d] text-gray-100 font-semibold px-9 rounded-ee-xl rounded-ss-xl' onClick={handleBookFlight}>Book Flight</button>
+          <button className='bg-[#3d008d] text-gray-100 font-semibold px-4 sm:px-7 lg:px-9 rounded-ee-xl rounded-ss-xl' onClick={handleBookFlight}>Book Flight</button>
         </div>
       </div>
 
-      {/* Adding ToastContainer component */}
+      {/* ToastContainer componenti eklenir. */}
       <ToastContainer />
 
       <div>
-        <a className='underline text-xs bg-[#d9ccea] px-4 pt-[6px] pb-3 rounded-es-lg rounded-ee-lg text-[#3d008d] font-semibold' href="#">Check the details</a>
+        <a className='underline text-xs bg-[#d9ccea] px-2 sm:px-4 pt-[6px] pb-2 sm:pb-3 rounded-es-lg rounded-ee-lg text-[#3d008d] font-semibold' href="#">Check the details</a>
       </div>
     </div>
   )

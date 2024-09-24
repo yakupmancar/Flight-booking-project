@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.use(cors());
 
+//API rotalarının ve rotalar içindeki fonksiyonların kullanılması için;
 app.use("/api/flights", flightRoutes);
 app.use("/api/myFlights", myFlightsRoutes);
 
@@ -20,6 +21,3 @@ app.listen(port, () => {
     connectDB();
     console.log('Server is running on port 5000');
 });
-
-
-//password: iZmKJj5gqP5EEtU7

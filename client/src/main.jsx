@@ -4,7 +4,8 @@ import App from './App.jsx'
 import "./assets//styles/tailwind.css"
 import { ClerkProvider } from '@clerk/clerk-react'
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY; //The clerk key we extracted from .env
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY; //.env'den çektiğimiz clerk key'i
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
@@ -12,7 +13,7 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>   {/* Pass the Clerk key as props */}
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>   {/* Clerk key'ini props provider ve props olarak geçtik. */}
       <App />
     </ClerkProvider>
   </StrictMode>,

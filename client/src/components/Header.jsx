@@ -12,39 +12,40 @@ const Header = () => {
         <header className='mx-6'>
             <div className='flex justify-between h-20 items-center'>
                 <Link to="/">
-                    <section className='flex items-center gap-x-1 text-xl font-bold '>
+                    <section className='flex items-center gap-x-2 text-sm sm:text-lg md:text-xl font-bold '>
                         <span><SiLotpolishairlines /></span>
                         <h1>PLANE SCAPE</h1>
                     </section>
                 </Link>
 
                 <section className='flex items-center gap-7 font-semibold'>
-                    <div className='flex items-center justify-center gap-x-2'>
+                    <div className='md:flex hidden items-center justify-center gap-x-2'>
                         <span><GiTicket /></span>
                         <span>Deals</span>
                     </div>
 
-                    <div className='flex items-center justify-center gap-x-2'>
+                    <div className='hidden md:flex items-center justify-center gap-x-2 cursor-pointer'>
                         <span><FaEarthAmericas /></span>
                         <span>Discover</span>
                     </div>
 
-                    <div className='flex items-center justify-center gap-x-2 '>
+                    <div className='flex items-center justify-center gap-x-1 sm:gap-x-2'>
 
-                        {/* Show user information if logged in */}
+                        {/* Oturum açılmışa kullanıcı bilgilerini gösterir. */}
                         <SignedIn>
-                            <UserButton />
-                            <h1>{user?.firstName}</h1>
+                            <UserButton/>
+                            <h1 className='sm:text-base text-sm'>{user?.firstName}</h1>
                             /
-                            <Link className='hover:underline' to="/myFlights">
+                            <Link className='hover:underline sm:text-base text-sm' to="/myFlights">
                                 MyFlights
                             </Link>
                         </SignedIn>
-                        {/* If not logged in, show Sign In and Sign Up buttons */}
+                        
+                        {/* Oturum açılmamışsa Signin ve Signout butonları gözükür. */}
                         <SignedOut>
-                            <SignUpButton className="hover:underline" mode='modal' />
+                            <SignUpButton className="hover:underline sm:text-base text-xs" mode='modal' />
                             |
-                            <SignInButton className="hover:underline" mode='modal' />
+                            <SignInButton className="hover:underline sm:text-base text-xs" mode='modal' />
                         </SignedOut>
                     </div>
                 </section>

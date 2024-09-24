@@ -4,13 +4,13 @@ import Home from './pages/Flights/Home';
 import MyFlights from './pages/MyFlights/MyFlights';
 import { FlightsContextProvider } from './context/FlightsContext';
 import { ToastContainer } from 'react-toastify';
-
+import "./assets/styles/scroll.css"
 
 function App() {
 
   return (
     <Router>
-      <div className='bg-[#eeeff1]'>
+      <div>
         <div className='max-w-7xl mx-auto'>
           <Header />
           <ToastContainer />
@@ -24,7 +24,7 @@ function App() {
 
             <Route path='/myFlights' element={
               <FlightsContextProvider>
-                <div className='w-full h-screen'>
+                <div>
                   <MyFlights />
                 </div>
               </FlightsContextProvider>

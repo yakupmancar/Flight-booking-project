@@ -3,8 +3,8 @@ import { createFlight, getMyFlights } from '../controllers/myFlightsControllers.
 
 const router = express.Router();
 
-router.get("/:userId", getMyFlights);
-router.post("/", createFlight);
+router.get("/:userId", getMyFlights);   //Kullanıcının kayıtlı uçuş rezervasyonlarını çektiğimiz get işlemi.
+router.post("/", createFlight);     //Kullanıcının uçuş rezervasyonu yapmasını sağlayan post işlemi.
 
 
 export default router
