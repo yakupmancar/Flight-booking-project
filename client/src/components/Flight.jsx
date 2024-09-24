@@ -86,7 +86,7 @@ const Flight = ({ flight }) => {
         destination: destinations[0],
         mainFlightCode: flight.mainFlight
       };
-
+      
       await addFlight(flightData);
 
       // Başarılı işlem uyarısı

@@ -88,6 +88,25 @@ export const FlightsContextProvider = ({ children }) => {
         setFilteredFlights(filtered);       //state'i filtrelenmiş uçuşlar ile güncelleriz.
     };
 
+
+    // Kullanıcının rezerve ettiği uçuşları API'den çeken fonksiyon.
+    const fetchMyFlights = async () => {
+        if (!user) return;
+        try {
+            const response = await fetch(`/api/myFlights/${user.id}`);
+            if (!response.ok) {
+                throw new Error('Veri çekme hatası.');
+            }
+            const result = await response.json();
+            setMyFlights(result.data);
+            setLoading(false);
+        } catch (error) {
+            setError('Veri çekme hatası');
+            setLoading(false);
+        }
+    };
+
+
     // Sayfa yüklendiğinde API'den uçuş verilerini çeker.
     useEffect(() => {
         fetchFlights();
@@ -145,26 +164,7 @@ export const FlightsContextProvider = ({ children }) => {
             console.error("Error adding flight:", error.message);
         }
     };
-
-
-    // Kullanıcının rezerve ettiği uçuşları API'den çeken fonksiyon.
-    const fetchMyFlights = async () => {
-        if (!user) return;
-        try {
-            const response = await fetch(`/api/myFlights/${user.id}`);
-            if (!response.ok) {
-                throw new Error('Veri çekme hatası.');
-            }
-            const result = await response.json();
-            setMyFlights(result.data);
-            setLoading(false);
-        } catch (error) {
-            setError('Veri çekme hatası');
-            setLoading(false);
-        }
-    };
-
-
+    
     // FlightsContext.Provider bileşeni ile, value prop'unda tüm gerekli veriler ve fonksiyonlar sağlanır.
     return (
         <FlightsContext.Provider value={{ flights: filteredFlights, loading, error, setFilters, myFlights, addFlight, destinations }}>
