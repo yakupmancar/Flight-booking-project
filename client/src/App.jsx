@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Flights/Home';
 import MyFlights from './pages/MyFlights/MyFlights';
-import { FlightsContextProvider } from './context/FlightsContext';
 import { ToastContainer } from 'react-toastify';
 import "./assets/styles/scroll.css"
+import { FlightsContextProvider } from './context/flightsContext';
 
 function App() {
 

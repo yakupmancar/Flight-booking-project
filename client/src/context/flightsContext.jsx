@@ -91,20 +91,35 @@ export const FlightsContextProvider = ({ children }) => {
 
     // Kullanıcının rezerve ettiği uçuşları API'den çeken fonksiyon.
     const fetchMyFlights = async () => {
-        if (!user) return;
+        if (!user || !user.id) {
+            console.log("User not found or user.id not defined");
+            return;
+        }
+        console.log("Fetching flights for user:", user.id); // Log ekledik.
         try {
             const response = await fetch(`/api/myFlights/${user.id}`);
+            if (response.status === 404) {
+                setMyFlights([]); // 404 hatasında boş liste döndürdük.
+                setLoading(false);
+                return;
+            }
             if (!response.ok) {
+                console.error('Response not ok:', response.status);
                 throw new Error('Veri çekme hatası.');
             }
             const result = await response.json();
+            console.log("Fetched flights:", result.data);
             setMyFlights(result.data);
             setLoading(false);
         } catch (error) {
+            console.error('Error fetching flights:', error);
             setError('Veri çekme hatası');
             setLoading(false);
         }
     };
+    
+
+
 
 
     // Sayfa yüklendiğinde API'den uçuş verilerini çeker.
@@ -121,7 +136,10 @@ export const FlightsContextProvider = ({ children }) => {
 
     // Kullanıcının kendi rezerve ettiği uçuşları çeker. user değiştiğinde bu useEffect çalışır.
     useEffect(() => {
-        fetchMyFlights();
+        if (user && user.id) {
+            console.log("fetching flights for user:", user.id);
+            fetchMyFlights();
+        }
     }, [user]);
 
 
@@ -164,7 +182,7 @@ export const FlightsContextProvider = ({ children }) => {
             console.error("Error adding flight:", error.message);
         }
     };
-    
+
     // FlightsContext.Provider bileşeni ile, value prop'unda tüm gerekli veriler ve fonksiyonlar sağlanır.
     return (
         <FlightsContext.Provider value={{ flights: filteredFlights, loading, error, setFilters, myFlights, addFlight, destinations }}>

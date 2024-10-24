@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import { FlightsContext } from '../../context/FlightsContext';
 import { FaAngleDown } from "react-icons/fa";
 import { useClerk } from '@clerk/clerk-react';
-import { Link } from 'react-router-dom';
+import { FlightsContext } from '../../context/flightsContext';
 
 const MyFlights = () => {
   const { myFlights } = useContext(FlightsContext);

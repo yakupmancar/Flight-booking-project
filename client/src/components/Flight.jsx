@@ -3,11 +3,11 @@ import { TbPlaneDeparture } from "react-icons/tb";
 import { IoIosAirplane } from "react-icons/io";
 import { TbPlaneArrival } from "react-icons/tb";
 import { SiPegasusairlines } from "react-icons/si";
-import { FlightsContext } from '../context/FlightsContext';
 import { useNavigate } from "react-router-dom";
 import { useUser } from '@clerk/clerk-react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { FlightsContext } from '../context/FlightsContext';
 
 
 const Flight = ({ flight }) => {

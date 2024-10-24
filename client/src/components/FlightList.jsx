@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Flight from './Flight'
-import { FlightsContext } from '../context/FlightsContext';
+import { FlightsContext } from '../context/flightsContext';
 
 // FlightList bileşeni uçuşları listelemek ve sayfalama (pagination) işlemi yapmak için kullanılır.
 const FlightList = () => {

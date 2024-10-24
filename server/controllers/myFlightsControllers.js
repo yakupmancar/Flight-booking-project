@@ -18,12 +18,13 @@ export const createFlight = async (req, res) => {
 
 // Kullanıcıya ait kayıtlı rezervasyonları getiren fonksiyon.
 export const getMyFlights = async (req, res) => {
-
     try {
-        const userId = req.params.userId    //Kullanıcın id'sini alırız.
-        const myFlights = await MyFlightModel.find({ userId: userId });  // Aldığımız id'ye göre kullanıcının kayıtlı uçuşlarını getiririz.
+        const userId = req.params.userId;
+        console.log("Fetching flights for user:", userId); // Log ekledik
+        const myFlights = await MyFlightModel.find({ userId: userId });
+        console.log("Fetched myFlights:", myFlights); // Log ekledik
         if (myFlights.length === 0) {
-            return res.status(404).send("No records found for the user");
+            return res.status(404).json({ success: false, message: "No records found for the user" });
         }
         res.status(200).json({ success: true, data: myFlights });
     } catch (error) {
@@ -31,3 +32,5 @@ export const getMyFlights = async (req, res) => {
         res.status(500).json({ success: false, message: "Server Error" });
     }
 };
+
+

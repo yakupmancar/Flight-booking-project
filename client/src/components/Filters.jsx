@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FlightsContext } from '../context/FlightsContext';
+import { FlightsContext } from '../context/flightsContext';
 
 
 const Filters = () => {
